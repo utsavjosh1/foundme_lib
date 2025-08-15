@@ -44,6 +44,4 @@ Develop a solution to enable location-based search within the leadsAI collection
 
 Here is a video explaination of my approach solving this problem.
 
-[Video Link](https://youtube.com/@utsavjoshi7455)
-
 Tech - OpenAI, LangChain, Pinecone.
