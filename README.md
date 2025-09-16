@@ -1,47 +1,77 @@
+# Problem Statement: Implementing Location Search in leadsAI Collection
 
-# Making a big transition to Nextjs
-Converting into nextjs
+## Background
+The current `leadsAI` MongoDB collection supports semantic search on **industry embeddings**.  
+However, MongoDB’s vector search is limited, preventing effective **location-based similarity search**.  
+While MongoDB may support this in the future, we need a **temporary but scalable solution**.
 
+---
 
-# **Problem Statement: Implementing Location Search in leadsAI Collection**
+## Objective
+Enable **hybrid search** across:
+- **Industry** (semantic embeddings)
+- **Location** (semantic embeddings or geospatial similarity)
+- **Designation** (keyword or embeddings)
+- **Number of employees** (structured filter)
 
-**Background:**
+---
 
-The current leadsAI collection in MongoDB uses industry embeddings for searching leads. However, searching based on location is not functional due to limitations in MongoDB's vector search capabilities. While MongoDB is working on improved vector search functionalities, a temporary solution is needed.
+## Requirements
+- Support combined **vector search + structured filtering**.
+- Easy integration with **Node.js/Express** and **LangChain pipelines**.
+- Scalable with clear upgrade paths (free tier → production).
 
-**Objective:**
+---
 
-Develop a solution to enable location-based search within the leadsAI collection.
+## Solution Options
 
-**Requirements:**
+### 1. Pinecone
+- Fully managed vector DB.  
+- Simple API and strong documentation.  
+- Best option for **ease of implementation**.
 
-- Integrate a vector search solution alongside MongoDB.
-- The chosen solution should allow simultaneous searching based on both industry and location embeddings.
-- Prioritize ease of implementation and readily available resources.
+### 2. Redis Vector Search
+- Lightweight, flexible, and production-ready.  
+- Good option if Redis is already part of infra.  
+- Requires more setup than Pinecone.
 
-**Possible Solutions:**
+### 3. Azure Cognitive Search
+- Enterprise-grade solution with **hybrid search** capabilities.  
+- Heavier learning curve and cloud lock-in.  
 
-- **Pinecone:** This vector database offers a user-friendly platform specifically designed for vector search tasks. It boasts extensive documentation and is considered the most straightforward option.
-- **Alternative Vector Search Solutions:** Consider Azure Cognitive Search (https://github.com/Azure-Samples/azure-search-sample-data) or Redis (https://redis.io/docs/get-started/vector-database/) if Pinecone is not feasible.
+---
 
-**Deliverables:**
+## Deliverables
+1. **Functional backend implementation** supporting hybrid queries  
+   - Industry + Location + Designation + Employees  
+2. **Documentation** of integration, architecture, and usage.  
+3. *(Optional)* Frontend support for a **location filter**.  
+4. *(Optional)* Demo video explaining approach and system flow.  
 
-- A functional implementation of location, industry, designation and number of employees search.
-- Documentation outlining the chosen solution, integration process, and usage instructions.
-- (Optional) Frontend modifications to incorporate a location filter if a suitable vector search solution is not readily available.
+---
 
-**Considerations:**
+## Considerations
+- Feasibility of integrating **Pinecone/Redis with MongoDB** while minimizing latency.  
+- **Performance benchmarks**:  
+  - Search latency `<200ms` for 95% of queries.  
+  - Acceptable recall/accuracy of matches.  
+- **Cost analysis**:  
+  - Pinecone/Redis free tier usage.  
+  - Estimated upgrade costs for production workloads.  
 
-- Evaluate the feasibility of integrating the chosen vector search solution with the existing system.
-- Ensure the solution provides acceptable performance and scalability.
-- If using Pinecone, explore free tier limitations and potential upgrade paths if necessary.
+---
 
-**Additional Notes:**
+## Tech Stack
+- **OpenAI** → embeddings generation  
+- **LangChain** → query orchestration  
+- **Pinecone** → vector database (primary choice)  
+- **Node.js + Express.js** → backend integration  
 
-- The provided resources (MongoDB forum discussion and documentation) can be referenced for further context on MongoDB's vector search limitations.
+---
 
-## **Solution:**
+## Next Steps
+- Prototype using **Pinecone + LangChain + OpenAI**.  
+- Run performance tests (latency, accuracy).  
+- Document integration steps.  
+- Extend frontend with optional location filter.
 
-Here is a video explaination of my approach solving this problem.
-
-Tech - OpenAI, LangChain, Pinecone.
